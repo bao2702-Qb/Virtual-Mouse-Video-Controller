@@ -4,7 +4,7 @@ A Python-based virtual mouse and video playback control system that uses hand ge
 
 ## Demo Video
 
-https://github.com/NaveenDeveloperR/Virtual-Mouse-Video-Controller/blob/main/video/Virtual-Mouse-Video-Controller.mp4
+https://user-images.githubusercontent.com/NaveenDeveloperR/Virtual-Mouse-Video-Controller/main/video/Virtual-Mouse-Video-Controller.mp4
 
 Watch the demo video above to see all gestures in action! The video demonstrates:
 - Mouse cursor control with index finger
