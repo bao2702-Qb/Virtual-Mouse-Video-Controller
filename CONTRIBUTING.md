@@ -1,4 +1,4 @@
-# Contributing to Virtual Mouse with Video Control
+# Contributing to Virtual Mouse + Video Controller Project
 
 Thank you for your interest in contributing to this project! This document provides guidelines and information for contributors.
 
@@ -323,4 +323,4 @@ By contributing to this project, you agree that your contributions will be licen
 
 ---
 
-Thank you for contributing to Virtual Mouse with Video Control! Your contributions help make this project better for everyone.
+Thank you for contributing to Virtual Mouse + Video Controller Project! Your contributions help make this project better for everyone.
