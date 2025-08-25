@@ -1,4 +1,4 @@
-# Virtual Mouse with Video Control
+# Virtual Mouse + Video Controller (Gesture Recognition with Python & OpenCV)
 
 A Python-based virtual mouse and video playback control system that uses hand gestures captured through your webcam. This project uses MediaPipe for hand tracking, OpenCV for image processing, and AutoPy for mouse control.
 
