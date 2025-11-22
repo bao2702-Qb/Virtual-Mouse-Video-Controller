@@ -1,0 +1,21 @@
+{
+  "model_type": "mlp",
+  "model_name": "MLP Neural Network",
+  "accuracy": 0.9509803921568627,
+  "n_samples": 1018,
+  "n_train_samples": 814,
+  "n_test_samples": 204,
+  "n_features": 47,
+  "n_classes": 7,
+  "gesture_map": {
+    "moving": 0,
+    "clicking": 1,
+    "forward": 2,
+    "backward": 3,
+    "volume_up": 4,
+    "volume_down": 5,
+    "next_video": 6,
+    "waiting": 7
+  },
+  "class_distribution": {
+    
