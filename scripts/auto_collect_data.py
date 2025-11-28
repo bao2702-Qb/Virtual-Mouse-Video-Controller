@@ -223,7 +223,8 @@ class AutoDataCollector:
         
         return self.counts
 
-if __name__ == "__main__":
+def main():
+    """Main entry point"""
     import sys
     
     duration = int(sys.argv[1]) if len(sys.argv) > 1 else 10
@@ -231,3 +232,5 @@ if __name__ == "__main__":
     collector = AutoDataCollector()
     collector.collect(duration_minutes=duration)
 
+if __name__ == "__main__":
+    main()

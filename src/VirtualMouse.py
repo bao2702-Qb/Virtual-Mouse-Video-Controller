@@ -5,14 +5,37 @@ import time
 import pyautogui
 import keyboard   # for sending video control keys
 import os
+import json
 
 # Try to import GestureClassifier for ML-based gesture recognition
 try:
     from GestureClassifier import GestureClassifier
-    USE_ML_MODEL = True
+    ML_AVAILABLE = True
 except ImportError:
-    USE_ML_MODEL = False
+    ML_AVAILABLE = False
     print("GestureClassifier not available, using rule-based detection only")
+
+# Auto-select mode based on comparison
+def load_auto_mode():
+    config_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config", "model_config.json")
+    if os.path.exists(config_file):
+        try:
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+            mode = config.get('selected_mode', 'rule-based')
+            ml_acc = config.get('ml_accuracy', 0)
+            rule_acc = config.get('rule_accuracy', 0)
+            print(f"\n{'='*50}")
+            print(f"AUTO-SELECTED MODE: {mode.upper()}")
+            print(f"  ML accuracy: {ml_acc*100:.2f}%")
+            print(f"  Rule-based: {rule_acc*100:.2f}%")
+            print(f"{'='*50}\n")
+            return mode == "ml"
+        except Exception as e:
+            print(f"Could not load config: {e}")
+    return True  # Default to ML if no config
+
+USE_ML_MODEL = load_auto_mode()
 
 ##########################
 wCam, hCam = 640, 480
@@ -53,12 +76,21 @@ wScr, hScr = pyautogui.size()
 # Initialize ML model if available
 ml_classifier = None
 if USE_ML_MODEL:
-    model_path = "models/gesture_model_random_forest.pkl"
-    if os.path.exists(model_path):
+    # Auto-detect any ML model in models directory
+    model_dir = "models"
+    model_path = None
+    
+    if os.path.exists(model_dir):
+        model_files = [f for f in os.listdir(model_dir) if f.startswith('gesture_model_') and f.endswith('.pkl')]
+        if model_files:
+            model_path = os.path.join(model_dir, model_files[0])
+    
+    if model_path and os.path.exists(model_path):
         try:
             ml_classifier = GestureClassifier(model_path)
             if ml_classifier.is_available():
-                print("✓ ML Model loaded successfully!")
+                model_name = os.path.basename(model_path).replace('gesture_model_', '').replace('.pkl', '').replace('_', ' ').title()
+                print(f"✓ ML Model loaded successfully! ({model_name})")
             else:
                 print("⚠ ML Model file exists but failed to load, using rule-based")
                 ml_classifier = None
@@ -402,3 +434,10 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+def main():
+    """Main entry point - runs the main loop"""
+    pass  # Main loop runs at module level
+
+if __name__ == "__main__":
+    main()

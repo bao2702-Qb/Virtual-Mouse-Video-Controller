@@ -229,18 +229,21 @@ class GestureTrainer:
         
         print(f"✓ Model saved to: {model_path}")
         
-        # Save metadata
+        # Save metadata - convert numpy types to Python native types
+        class_dist = Counter(y)
+        class_dist_dict = {str(k): int(v) for k, v in class_dist.items()}
+        
         metadata = {
             'model_type': best_model_type,
             'model_name': best_name,
             'accuracy': float(best_accuracy),
-            'n_samples': len(X),
-            'n_train_samples': len(X_train),
-            'n_test_samples': len(X_test),
+            'n_samples': int(len(X)),
+            'n_train_samples': int(len(X_train)),
+            'n_test_samples': int(len(X_test)),
             'n_features': int(X.shape[1]),
-            'n_classes': len(np.unique(y)),
-            'gesture_map': self.gesture_map,
-            'class_distribution': {k: int(v) for k, v in Counter(y).items()},
+            'n_classes': int(len(np.unique(y))),
+            'gesture_map': {k: int(v) for k, v in self.gesture_map.items()},
+            'class_distribution': class_dist_dict,
             'all_models_comparison': {
                 result['name']: {
                     'accuracy': float(result['accuracy']),
@@ -268,7 +271,8 @@ class GestureTrainer:
         
         return best_model
 
-if __name__ == "__main__":
+def main():
+    """Main entry point"""
     print("="*70)
     print("GESTURE RECOGNITION MODEL TRAINING")
     print("="*70)
@@ -277,3 +281,5 @@ if __name__ == "__main__":
     trainer = GestureTrainer()
     trainer.train_and_compare()
 
+if __name__ == "__main__":
+    main()

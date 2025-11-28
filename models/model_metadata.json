@@ -18,4 +18,26 @@
     "waiting": 7
   },
   "class_distribution": {
-    
+    "0": 172,
+    "1": 101,
+    "2": 134,
+    "3": 124,
+    "4": 243,
+    "5": 107,
+    "6": 137
+  },
+  "all_models_comparison": {
+    "Random Forest": {
+      "accuracy": 0.9313725490196079,
+      "is_best": false
+    },
+    "SVM": {
+      "accuracy": 0.8676470588235294,
+      "is_best": false
+    },
+    "MLP Neural Network": {
+      "accuracy": 0.9509803921568627,
+      "is_best": true
+    }
+  }
+}
